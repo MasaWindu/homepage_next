@@ -440,22 +440,39 @@ td:last-child {
   .hero {
     flex-direction: column;
     text-align: center;
+    align-items: center; /* Center items on mobile */
     gap: 32px;
     padding: 40px 24px;
+    border-radius: 24px;
   }
   
   .thisisme {
     width: 240px;
     height: 240px;
+    margin: 0 auto; /* Explicitly center */
   }
 
   #myname img {
     margin: 0 auto 1.5rem;
     height: 80px;
   }
+
+  .name-separator {
+    margin: 0 auto 1.5rem;
+    width: 80%;
+  }
   
   #icon {
     justify-content: center;
+    align-items: center; /* Prevent icon stretching */
+    margin-top: 1.5rem;
+    padding-top: 0;
+  }
+  
+  #icon img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
   }
   
   .header {
