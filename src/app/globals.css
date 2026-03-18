@@ -149,6 +149,14 @@ section:nth-child(5) { animation-delay: 0.4s; }
   color: var(--primary);
 }
 
+.hamburger {
+  display: none;
+}
+
+.mobile-menu {
+  display: none;
+}
+
 /* Hero Section - Unified Card */
 .hero {
   display: flex;
