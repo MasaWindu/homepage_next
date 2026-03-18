@@ -45,124 +45,154 @@ export default async function HomePage() {
             className="thisisme"
           />
           <div id="myname">
-            <img src={images["myname"] ?? "/img/myname.png"} alt="name" />
+            <img src={images["myname"] ?? "/img/myname.png"} alt="Masato Yamagishi Identification" />
+            <hr className="name-separator" />
             <p>
-              神戸市立工業高等専門学校
-              <br />
-              専攻科　電気電子工学専攻　2年
-              <br />
-              SAI（髙田研究室）
-              <br />
-              <br />
-              <b>興味のある分野</b>
-              <br />
-              Human-Computer Interaction(HCI)
-              <br />
-              Sensing Interface
-              <br />
-              Wearable Computing
-              <br />
-              Augmented Human
-              <br />
-              Internet of Things(IoT)
-              <br />
+              神戸市立工業高等専門学校<br />
+              専攻科 電気電子工学専攻 2年<br />
+              SAI（高田研究室）
             </p>
+            <b>興味のある分野</b>
+            <div className="interest-list">
+              Human-Computer Interaction (HCI)<br />
+              Sensing Interface<br />
+              Wearable Computing<br />
+              Augmented Human<br />
+              Internet of Things (IoT)
+            </div>
             <div id="icon">
-              <a href="https://x.com/Masato_HCI">
-                <img src={images["icon_x"] ?? "/img/X.jpg"} id="icon" alt="X" />
-              </a>
-              <a href="https://github.com/MasaWindu">
-                <img src={images["icon_github"] ?? "/img/github.png"} id="icon" alt="GitHub" />
-              </a>
-              <a href="https://sai.ac/">
-                <img src={images["icon_sai"] ?? "/img/SAI.png"} id="icon" alt="SAI" />
-              </a>
+              <a href="https://x.com/masato_yamagis" target="_blank" rel="noreferrer"><img src={images["icon_x"] ?? "/img/X.jpg"} alt="Twitter" /></a>
+              <a href="https://github.com/MasaWindu" target="_blank" rel="noreferrer"><img src={images["icon_github"] ?? "/img/github.png"} alt="GitHub" /></a>
+              <a href="https://sai.ac/project/WISS2024_yamagishi" target="_blank" rel="noreferrer"><img src={images["icon_sai"] ?? "/img/SAI.png"} alt="SAI" /></a>
             </div>
           </div>
         </section>
 
         <section id="Biography">
           <h1>Biography</h1>
-          <table>
-            <tbody>
-              {biography.map((row) => (
-                <tr key={`${row.date}-${row.text}`}>
-                  <td>{row.date}</td>
-                  <td>{row.text}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="list-container">
+            <table>
+              <tbody>
+                {biography.map((row, index) => (
+                  <tr key={`${row.startDate}-${index}`}>
+                    <td className="date-column">
+                      <div className="date-range">
+                        <div className="start-date">{row.startDate}</div>
+                        {row.endDate && (
+                          <>
+                            <div className="date-separator">|</div>
+                            <div className="end-date">{row.endDate}</div>
+                          </>
+                        )}
+                      </div>
+                    </td>
+                    <td>{row.text}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
 
         <section id="Publications">
           <h1>Publication</h1>
           {Object.entries(groupedPublications).map(([category, items]) => (
-            <div key={category}>
+            <div key={category} className="category-group">
               <h2>{category}</h2>
-              {items.map((pub) => (
-                <div
-                  className="publication"
-                  key={`${pub.category}-${pub.title}-${pub.detail}`}
-                >
-                  {pub.authors}
-                  <br />
-                  {pub.title}
-                  <br />
-                  {pub.detail}
-                  {pub.linkUrl && (
-                    <a href={pub.linkUrl} target="_blank" rel="noreferrer">
-                      <img src={images["icon_link"] ?? "/img/link.png"} alt="link" />
-                    </a>
-                  )}
-                </div>
-              ))}
+              {items.map((pub) => {
+                const CardContent = (
+                  <>
+                    <div className="pub-authors">{pub.authors}</div>
+                    <div className="pub-title"><strong>{pub.title}</strong></div>
+                    <div className="pub-detail">{pub.detail}</div>
+                  </>
+                );
+
+                return pub.linkUrl ? (
+                  <a
+                    href={pub.linkUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="publication clickable"
+                    key={`${pub.category}-${pub.title}-${pub.detail}`}
+                  >
+                    {CardContent}
+                  </a>
+                ) : (
+                  <div
+                    className="publication"
+                    key={`${pub.category}-${pub.title}-${pub.detail}`}
+                  >
+                    {CardContent}
+                  </div>
+                );
+              })}
             </div>
           ))}
         </section>
 
         <section id="Qualifications">
           <h1>Qualifications</h1>
-          <table>
-            <tbody>
-              {qualifications.map((row) => (
-                <tr key={`${row.date}-${row.text}`}>
-                  <td>{row.date}</td>
-                  <td>{row.text}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="list-container">
+            <table>
+              <tbody>
+                {qualifications.map((row) => (
+                  <tr key={`${row.date}-${row.text}`}>
+                    <td className="date-column">
+                      <div className="single-date">{row.date}</div>
+                    </td>
+                    <td>{row.text}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
 
         <AwardsShelf />
 
         <section id="Volunteer">
           <h1>Volunteer</h1>
-          <table>
-            <tbody>
-              {volunteers.map((row) => (
-                <tr key={`${row.date}-${row.text}`}>
-                  <td>{row.date}</td>
-                  <td>{row.text}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="list-container">
+            <table>
+              <tbody>
+                {volunteers.map((row) => (
+                  <tr key={`${row.date}-${row.text}`}>
+                    <td className="date-column">
+                      <div className="single-date">{row.date}</div>
+                    </td>
+                    <td>{row.text}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
 
         <section id="Internship">
           <h1>Internship</h1>
-          <table>
-            <tbody>
-              {internships.map((row) => (
-                <tr key={`${row.date}-${row.text}`}>
-                  <td>{row.date}</td>
-                  <td>{row.text}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="list-container">
+            <table>
+              <tbody>
+                {internships.map((row, index) => (
+                  <tr key={`${row.startDate}-${index}`}>
+                    <td className="date-column">
+                      <div className="date-range">
+                        <div className="start-date">{row.startDate}</div>
+                        {row.endDate && (
+                          <>
+                            <div className="date-separator">|</div>
+                            <div className="end-date">{row.endDate}</div>
+                          </>
+                        )}
+                      </div>
+                    </td>
+                    <td>{row.text}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
 
         <footer id="footer">

@@ -29,13 +29,18 @@ async function fetchSheet(envKey: string): Promise<RawRow[]> {
 }
 
 export type BiographyRow = {
-  date: string;
+  startDate: string;
+  endDate: string;
   text: string;
 };
 
 export async function getBiographyRows(): Promise<BiographyRow[]> {
   const rows = await fetchSheet("BIOGRAPHY_SHEET_URL");
-  return rows.map(([date, text = ""]) => ({ date, text }));
+  return rows.map(([startDate = "", endDate = "", text = ""]) => ({
+    startDate,
+    endDate,
+    text
+  }));
 }
 
 export type QualificationRow = {
@@ -97,14 +102,24 @@ export type SimpleRow = {
   text: string;
 };
 
+export type RangeRow = {
+  startDate: string;
+  endDate: string;
+  text: string;
+};
+
 export async function getVolunteerRows(): Promise<SimpleRow[]> {
   const rows = await fetchSheet("VOLUNTEER_SHEET_URL");
   return rows.map(([date = "", text = ""]) => ({ date, text }));
 }
 
-export async function getInternshipRows(): Promise<SimpleRow[]> {
+export async function getInternshipRows(): Promise<RangeRow[]> {
   const rows = await fetchSheet("INTERNSHIP_SHEET_URL");
-  return rows.map(([date = "", text = ""]) => ({ date, text }));
+  return rows.map(([startDate = "", endDate = "", text = ""]) => ({
+    startDate,
+    endDate,
+    text
+  }));
 }
 
 export type ImageRow = {

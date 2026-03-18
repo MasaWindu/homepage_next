@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { getImageMap } from "@/lib/googleSheets";
+import { Inter, Outfit } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export async function generateMetadata(): Promise<Metadata> {
   const images = await getImageMap();
@@ -56,8 +60,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ja">
-      <body>{children}</body>
+    <html lang="ja" className={`${inter.variable} ${outfit.variable}`}>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
