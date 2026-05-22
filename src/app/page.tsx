@@ -48,9 +48,9 @@ export default async function HomePage() {
             <img src={images["myname"] ?? "/img/myname.png"} alt="Masato Yamagishi Identification" />
             <hr className="name-separator" />
             <p>
-              神戸市立工業高等専門学校<br />
-              専攻科 電気電子工学専攻 2年<br />
-              SAI（高田研究室）
+              筑波大学大学院理工情報生命学術院<br />
+              システム情報工学研究群情報理工学位プログラム<br />
+              IPLAB WAVEチーム（志築文太郎 教授 指導）
             </p>
             <b>興味のある分野</b>
             <div className="interest-list">
